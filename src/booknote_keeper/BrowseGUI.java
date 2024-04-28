@@ -4,17 +4,30 @@
  */
 package booknote_keeper;
 
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
+
 /**
  *
  * @author ALIENWARE
  */
 public class BrowseGUI extends javax.swing.JPanel {
+    
+    private ArrayList<Book> books = new ArrayList<>();
 
     /**
      * Creates new form BrowseGUI
      */
     public BrowseGUI() {
         initComponents();
+        displayBooks(books); //display all books
     }
 
     /**
@@ -28,6 +41,7 @@ public class BrowseGUI extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
+        booklist_panel = new javax.swing.JPanel();
 
         jPanel1.setLayout(new java.awt.BorderLayout());
 
@@ -36,23 +50,79 @@ public class BrowseGUI extends javax.swing.JPanel {
         jLabel3.setText("BROWSE ALL BOOKS");
         jPanel1.add(jLabel3, java.awt.BorderLayout.CENTER);
 
+        booklist_panel.setLayout(new javax.swing.BoxLayout(booklist_panel, javax.swing.BoxLayout.Y_AXIS));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 804, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 741, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addComponent(booklist_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 626, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(booklist_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(546, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+    
+    
+    /**
+     * Load a list of books from the file. 
+     * Go through the list and assign a button to each book with title, author, genre written on the label. 
+     * Each button has an eventlistener that can open a bookGUI to show the detail content.
+     * @param books 
+     */
+    public void displayBooks(ArrayList<Book> books){
+        books = BookManager.loadBooks();
+        
+        
+        
+        for(Book book: books){
+            String book_label = " " + book.getTitle() + " ( " + book.getAuthor() + "  " + book.getGenre() + ") ";
+            
+            System.out.println("Books: " + book_label);
+            
+            JButton btn = new JButton(book_label);
+            btn.setBackground(Color.WHITE);
+            btn.setBorder(new LineBorder(Color.BLACK));
+            btn.setBorder(BorderFactory.createCompoundBorder(btn.getBorder(), new EmptyBorder(5,10,5,10)));
+            //btn.addActionListener(new BookClickListener(book));
+            booklist_panel.add(btn);
+            booklist_panel.repaint();
+            booklist_panel.revalidate();
+        }
+    }
+    
+    public void refreshBooks() {
+        System.out.println("Books are refreshed");
+        displayBooks(books);
+    }
+    
+    private class BookClickListener implements ActionListener {
+        private Book book;
 
+        public BookClickListener(Book book) {
+            this.book = book;
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            // Open a BookGUI to show the details of the selected book
+            System.out.println("Show book detail!");
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel booklist_panel;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
+

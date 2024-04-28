@@ -1,61 +1,72 @@
 package booknote_keeper;
 
+import java.io.*;
 import java.util.ArrayList;
 
 public class BookManager {
-    private ArrayList<Book> books;
+    
+    //save a book object to file.
+    public static void saveBook(Book book){
+        
+        book.BrowseBook();
+        
+        try {
+                String filepath = "data/" + book.getTitle() + ".ser";
+                
+                System.out.println(filepath);
+                
+                FileOutputStream f = new FileOutputStream(filepath);
+                ObjectOutputStream o = new ObjectOutputStream(f);
 
-    public BookManager(){
-        books = new ArrayList<>();
+                // Write objects to file
+                o.writeObject(book);
+
+                System.out.println("Book saved successfully.");
+
+        } catch (FileNotFoundException e) {
+                System.err.println("File not found: " + e.getMessage());
+                e.printStackTrace();
+        } catch (IOException e) {
+                System.err.println("Error saving books: " + e.getMessage());
+                e.printStackTrace();
+        } 
     }
+    
+    
+    //load all books from file
+    public static ArrayList<Book> loadBooks() {
+        ArrayList<Book> loadedBooks = new ArrayList<>();
+        
+        File directory = new File("data");
+        File[] files = directory.listFiles();
 
-    public void addBook(String title, String author, String genre, String review){
-        Book book = new Book(title, author, genre, review);
-        books.add(book);
-    }
+        if (files != null) {
+            for (File file : files) {
+                if (file.isFile() && file.getName().endsWith(".ser")) {
+                    
+                    //System.out.println(file.getName());
+                    
+                    try (FileInputStream f = new FileInputStream(file);
+                         ObjectInputStream o = new ObjectInputStream(f)) {
 
-    public Book searchByTitle(String title){
-        for(Book book : books){
-            if(book.getTitle().equalsIgnoreCase(title)){
-                return book;
+                        Book book = (Book) o.readObject();
+                        loadedBooks.add(book);
+                    } catch (IOException | ClassNotFoundException e) {
+                        System.err.println("Error loading book from file: " + file.getName());
+                        e.printStackTrace();
+                    }
+                }
             }
         }
-        return null;
+        
+       
+        
+        return loadedBooks;
     }
+    
+   
+    
+    
 
-    public Book searchByAuthor(String author){
-        for(Book book : books){
-            if(book.getAuthor().equalsIgnoreCase(author)){
-                return book;
-            }
-        }
-        return null;
-    }
-
-    public Book searchByGenre(String genre){
-        for(Book book : books){
-            if(book.getGenre().equalsIgnoreCase(genre)){
-                return book;
-            }
-        }
-        return null;
-    }
-
-    public boolean deleteBook(String title){
-        return books.removeIf(book -> book.getTitle().equalsIgnoreCase(title));
-    }
-
-    public void browseAllBooks(){
-        for(Book book : books){
-            book.BrowseBook();
-        }
-    }
-
-    public void editBook(Book book, String newTitle, String newAuthor, String newGenre, String newReview){
-        book.setAuthor(newAuthor);
-        book.setGenre(newGenre);
-        book.setReview(newReview);
-        book.setTitle(newTitle);
-    }
 
 }

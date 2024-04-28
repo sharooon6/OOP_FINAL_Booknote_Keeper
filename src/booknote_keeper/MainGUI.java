@@ -6,6 +6,7 @@ package booknote_keeper;
 
 import java.awt.CardLayout;
 import java.awt.Image;
+import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
@@ -22,6 +23,7 @@ public class MainGUI extends javax.swing.JFrame {
      JPanel browse_panel;
      JPanel add_panel;
      JPanel notes_panel;
+     private ArrayList<Book> books = new ArrayList<>();
     
     public MainGUI() {
         initComponents();
@@ -54,6 +56,10 @@ public class MainGUI extends javax.swing.JFrame {
         btn_AllBooks = new javax.swing.JButton();
         btn_AddBook = new javax.swing.JButton();
         btn_AllNotes = new javax.swing.JButton();
+        btn_clearData = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        logo = new javax.swing.JLabel();
+        logo1 = new javax.swing.JLabel();
         card_panel = new javax.swing.JPanel();
         empty_panel = new javax.swing.JPanel();
 
@@ -96,6 +102,51 @@ public class MainGUI extends javax.swing.JFrame {
             }
         });
 
+        btn_clearData.setBackground(java.awt.Color.gray);
+        btn_clearData.setFont(new java.awt.Font("Cascadia Code", 0, 14)); // NOI18N
+        btn_clearData.setForeground(new java.awt.Color(255, 255, 255));
+        btn_clearData.setText("CLEAR ALL DATA");
+        btn_clearData.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        btn_clearData.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_clearDataActionPerformed(evt);
+            }
+        });
+
+        jPanel1.setBackground(java.awt.Color.black);
+        jPanel1.setForeground(new java.awt.Color(255, 255, 255));
+
+        logo.setFont(new java.awt.Font("Cascadia Code", 0, 24)); // NOI18N
+        logo.setForeground(new java.awt.Color(255, 255, 255));
+        logo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        logo.setText("BOOKNOTE");
+        logo.setToolTipText("");
+
+        logo1.setFont(new java.awt.Font("Cascadia Code", 0, 24)); // NOI18N
+        logo1.setForeground(new java.awt.Color(255, 255, 255));
+        logo1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        logo1.setText("KEEPER");
+        logo1.setToolTipText("");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(logo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(logo1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(logo, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(logo1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout button_panelLayout = new javax.swing.GroupLayout(button_panel);
         button_panel.setLayout(button_panelLayout);
         button_panelLayout.setHorizontalGroup(
@@ -104,19 +155,24 @@ public class MainGUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(button_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btn_AllBooks, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btn_AddBook, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
-                    .addComponent(btn_AllNotes, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE))
+                    .addComponent(btn_AddBook, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_AllNotes, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_clearData, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE))
                 .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         button_panelLayout.setVerticalGroup(
             button_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(button_panelLayout.createSequentialGroup()
-                .addGap(142, 142, 142)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
                 .addComponent(btn_AllBooks, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btn_AddBook, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btn_AllNotes, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(105, 105, 105)
+                .addComponent(btn_clearData, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -129,11 +185,11 @@ public class MainGUI extends javax.swing.JFrame {
         empty_panel.setLayout(empty_panelLayout);
         empty_panelLayout.setHorizontalGroup(
             empty_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 730, Short.MAX_VALUE)
+            .addGap(0, 741, Short.MAX_VALUE)
         );
         empty_panelLayout.setVerticalGroup(
             empty_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 590, Short.MAX_VALUE)
+            .addGap(0, 499, Short.MAX_VALUE)
         );
 
         card_panel.add(empty_panel, "card2");
@@ -144,13 +200,14 @@ public class MainGUI extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(button_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(card_panel, javax.swing.GroupLayout.PREFERRED_SIZE, 730, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(card_panel, javax.swing.GroupLayout.PREFERRED_SIZE, 741, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(18, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(button_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(card_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(card_panel, javax.swing.GroupLayout.DEFAULT_SIZE, 499, Short.MAX_VALUE)
         );
 
         card_panel.getAccessibleContext().setAccessibleName("card_panel");
@@ -170,12 +227,19 @@ public class MainGUI extends javax.swing.JFrame {
         open_notes_gui();
     }//GEN-LAST:event_btn_AllNotesActionPerformed
 
+    private void btn_clearDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_clearDataActionPerformed
+        System.out.println("Clear all data from the folder!");
+    }//GEN-LAST:event_btn_clearDataActionPerformed
+
     public void open_browse_gui() {
         System.out.println("show all books");
         card_panel.removeAll();
         card_panel.add(browse_panel);
         card_panel.repaint();
         card_panel.revalidate();
+        
+        BrowseGUI browse = new BrowseGUI();
+        browse.refreshBooks();
     }
 	
     public void open_add_gui() {
@@ -198,8 +262,12 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JButton btn_AddBook;
     private javax.swing.JButton btn_AllBooks;
     private javax.swing.JButton btn_AllNotes;
+    private javax.swing.JButton btn_clearData;
     private javax.swing.JPanel button_panel;
     private javax.swing.JPanel card_panel;
     private javax.swing.JPanel empty_panel;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel logo;
+    private javax.swing.JLabel logo1;
     // End of variables declaration//GEN-END:variables
 }

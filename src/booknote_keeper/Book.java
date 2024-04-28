@@ -1,9 +1,12 @@
 package booknote_keeper;
 
-
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Book {
+public class Book implements Serializable {
+    private static int nextId = 1; //id for filename
+    private int id;
+    
     private String title;
     private String review;
     private String author;
@@ -11,6 +14,7 @@ public class Book {
     private ArrayList<Note> notes;
 
     public Book(String title, String review, String author, String genre){
+        this.id = nextId++;
         this.title = title;
         this.author = author;
         this.genre = genre;
@@ -21,6 +25,10 @@ public class Book {
     public void addNote(Note note){
         notes.add(note);
         
+    }
+    
+    public int getId() {
+        return id;
     }
 
     public String getTitle(){
@@ -62,4 +70,6 @@ public class Book {
     public void BrowseBook(){
         System.out.println("Title: " + this.title + ", Author: " + this.author + ", Genre " + this.genre + ", Review: " + this.review);
     }
+    
+   
 }
