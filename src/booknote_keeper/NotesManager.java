@@ -1,4 +1,4 @@
-
+package booknote_keeper;
 
 public class NotesManager {
 

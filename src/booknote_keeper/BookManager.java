@@ -1,3 +1,5 @@
+package booknote_keeper;
+
 import java.util.ArrayList;
 
 public class BookManager {

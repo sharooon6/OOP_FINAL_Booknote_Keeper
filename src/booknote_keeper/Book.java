@@ -1,3 +1,6 @@
+package booknote_keeper;
+
+
 import java.util.ArrayList;
 
 public class Book {
@@ -17,6 +20,7 @@ public class Book {
 
     public void addNote(Note note){
         notes.add(note);
+        
     }
 
     public String getTitle(){

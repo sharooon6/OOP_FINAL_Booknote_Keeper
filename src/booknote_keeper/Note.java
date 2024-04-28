@@ -1,3 +1,5 @@
+package booknote_keeper;
+
 
 public class Note {
     private String text;
@@ -24,3 +26,4 @@ public class Note {
         this.pageNumber = pageNumber;
     }
 }
+
