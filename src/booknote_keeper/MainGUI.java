@@ -229,6 +229,7 @@ public class MainGUI extends javax.swing.JFrame {
 
     private void btn_clearDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_clearDataActionPerformed
         System.out.println("Clear all data from the folder!");
+        BookManager.DeleteAllBooks();
     }//GEN-LAST:event_btn_clearDataActionPerformed
 
     public void open_browse_gui() {
@@ -238,8 +239,7 @@ public class MainGUI extends javax.swing.JFrame {
         card_panel.repaint();
         card_panel.revalidate();
         
-        BrowseGUI browse = new BrowseGUI();
-        browse.refreshBooks();
+       
     }
 	
     public void open_add_gui() {

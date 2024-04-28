@@ -81,9 +81,7 @@ public class BrowseGUI extends javax.swing.JPanel {
      */
     public void displayBooks(ArrayList<Book> books){
         books = BookManager.loadBooks();
-        
-        
-        
+
         for(Book book: books){
             String book_label = " " + book.getTitle() + " ( " + book.getAuthor() + "  " + book.getGenre() + ") ";
             

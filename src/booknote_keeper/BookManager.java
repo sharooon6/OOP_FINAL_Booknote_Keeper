@@ -11,7 +11,7 @@ public class BookManager {
         book.BrowseBook();
         
         try {
-                String filepath = "data/" + book.getTitle() + ".ser";
+                String filepath = "data/" + book.getTitle() + "-" + book.getAuthor() + ".ser";
                 
                 System.out.println(filepath);
                 
@@ -58,13 +58,27 @@ public class BookManager {
                 }
             }
         }
-        
-       
-        
         return loadedBooks;
     }
     
-   
+    public static void DeleteAllBooks() {
+        
+        File directory = new File("data");
+        File[] files = directory.listFiles();
+
+        if (files != null) {
+            for (File file : files) {
+                if (file.isFile() && file.getName().endsWith(".ser")) {
+                    if (file.delete()) {
+                        System.out.println("Deleted: " + file.getAbsolutePath());
+                    } else {
+                        System.err.println("Failed to delete: " + file.getAbsolutePath());
+                    }
+                }
+            }
+        }
+
+    }
     
     
 
