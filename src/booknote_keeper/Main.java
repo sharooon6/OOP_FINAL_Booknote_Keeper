@@ -5,5 +5,8 @@ public class Main {
 
 		MainGUI mg =new MainGUI();
 		mg.setVisible(true);
+                
+                //initialize with browse UI.
+                mg.open_browse_gui();
 	}
 }
