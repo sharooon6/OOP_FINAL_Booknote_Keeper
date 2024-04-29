@@ -32,7 +32,6 @@ public class BookManager {
         } 
     }
     
-    
     //load all books from file
     public static ArrayList<Book> loadBooks() {
         ArrayList<Book> loadedBooks = new ArrayList<>();
@@ -60,6 +59,8 @@ public class BookManager {
         }
         return loadedBooks;
     }
+    
+   
     
     public static void DeleteAllBooks() {
         

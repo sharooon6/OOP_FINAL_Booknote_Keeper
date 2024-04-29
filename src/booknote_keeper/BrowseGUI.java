@@ -4,13 +4,23 @@
  */
 package booknote_keeper;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
+import javax.swing.DefaultListCellRenderer;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
+import javax.swing.JList;
+import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.ListModel;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
@@ -21,13 +31,42 @@ import javax.swing.border.LineBorder;
 public class BrowseGUI extends javax.swing.JPanel {
     
     private ArrayList<Book> books = new ArrayList<>();
+    private JList<String> booklist;
+    private DefaultListModel<String> listModel;
 
     /**
      * Creates new form BrowseGUI
      */
     public BrowseGUI() {
         initComponents();
-        displayBooks(books); //display all books
+        
+        //create booklist ui
+        listModel = new DefaultListModel<>();
+        booklist = new JList<>(listModel);
+        JScrollPane scrollPane = new JScrollPane(booklist);
+        
+        //modify the UI
+        booklist.setOpaque(false);
+        scrollPane.setOpaque(false);
+        booklist.setBorder(new EmptyBorder(5,5,5,5));
+        booklist_panel.add(scrollPane, BorderLayout.CENTER); 
+        
+        booklist.setCellRenderer(new DefaultListCellRenderer() {
+            private int padding = 5; 
+            private Font font = new Font("Cascadia Code", Font.PLAIN, 14); // Customize the font here
+
+            @Override
+            public Component getListCellRendererComponent(JList<?> list, Object value, int index,
+                    boolean isSelected, boolean cellHasFocus) {
+                Component c = super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+
+                setFont(font);
+                setBorder(BorderFactory.createEmptyBorder(padding, 0, 0, 0));
+                return c;
+            }
+        });
+        
+        displayBooks(books,null,null,null); //display all books
     }
 
     /**
@@ -42,7 +81,10 @@ public class BrowseGUI extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         booklist_panel = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        search_panel = new javax.swing.JPanel();
+        search_filter = new javax.swing.JComboBox<>();
+        keyword = new javax.swing.JTextField();
+        btn_search = new javax.swing.JButton();
 
         jPanel1.setLayout(new java.awt.BorderLayout());
 
@@ -51,30 +93,77 @@ public class BrowseGUI extends javax.swing.JPanel {
         jLabel3.setText("BROWSE ALL BOOKS");
         jPanel1.add(jLabel3, java.awt.BorderLayout.CENTER);
 
-        booklist_panel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+        booklist_panel.setLayout(new java.awt.BorderLayout());
 
-        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-        booklist_panel.add(jScrollPane1);
+        search_panel.setAlignmentY(0.5F);
+        search_panel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        search_filter.setFont(new java.awt.Font("Cascadia Code", 0, 14)); // NOI18N
+        search_filter.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Title", "Author", "Genre" }));
+        search_panel.add(search_filter, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 112, 30));
+
+        keyword.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        search_panel.add(keyword, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 10, 440, 30));
+
+        btn_search.setBackground(java.awt.Color.darkGray);
+        btn_search.setFont(new java.awt.Font("Cascadia Code", 0, 14)); // NOI18N
+        btn_search.setForeground(new java.awt.Color(255, 255, 255));
+        btn_search.setText("SEARCH");
+        btn_search.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_searchActionPerformed(evt);
+            }
+        });
+        search_panel.add(btn_search, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 10, 90, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 741, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(booklist_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(booklist_panel, javax.swing.GroupLayout.PREFERRED_SIZE, 722, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addComponent(search_panel, javax.swing.GroupLayout.PREFERRED_SIZE, 720, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 720, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(booklist_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(536, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(search_panel, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(booklist_panel, javax.swing.GroupLayout.DEFAULT_SIZE, 507, Short.MAX_VALUE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
+    
+    
+    /**
+     * Search Button: get the search_filter, keyword, return a list of books.
+     * @param evt 
+     */
+    private void btn_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_searchActionPerformed
+        if(keyword.getText().isEmpty()){
+            displayBooks(books,null,null,null); 
+        }
+        else{
+            String filter = search_filter.getSelectedItem().toString();
+            System.out.println("Search by: " + filter);
+
+            if(filter.equalsIgnoreCase("Title")){
+                //search by title
+                displayBooks(books,keyword.getText().toLowerCase(),null,null);
+            }
+            else if(filter.equalsIgnoreCase("Author")){
+                //search by author
+                displayBooks(books,null,keyword.getText().toLowerCase(),null);
+            }
+            else if(filter.equalsIgnoreCase("Genre")){
+                //search by genre
+                displayBooks(books,null,null,keyword.getText().toLowerCase());
+            }
+        }
+    }//GEN-LAST:event_btn_searchActionPerformed
     
     
     /**
@@ -82,52 +171,42 @@ public class BrowseGUI extends javax.swing.JPanel {
      * Go through the list and assign a button to each book with title, author, genre written on the label. 
      * Each button has an eventlistener that can open a bookGUI to show the detail content.
      * @param books 
+     * @param title 
+     * @param author 
+     * @param genre 
      */
-    public void displayBooks(ArrayList<Book> books){
+    public void displayBooks(ArrayList<Book> books, String title, String author, String genre){
         books = BookManager.loadBooks();
-        //booklist_panel.removeAll();
-
-        for(Book book: books){
-            String book_label = " " + book.getTitle() + " ( " + book.getAuthor() + "  " + book.getGenre() + ") ";
-            
-            System.out.println("Books: " + book_label);
-            
-            JButton btn = new JButton(book_label);
-            btn.setBackground(Color.WHITE);
-            btn.setBorder(new LineBorder(Color.BLACK));
-            btn.setBorder(BorderFactory.createCompoundBorder(btn.getBorder(), new EmptyBorder(5,10,5,10)));
-            //btn.addActionListener(new BookClickListener(book));
-            booklist_panel.add(btn);
-        }
+        listModel.clear();
         
-        booklist_panel.repaint();
-        booklist_panel.revalidate();
-    }
-    
-    public void refreshBooks() {
-        System.out.println("Books are refreshed");
-        displayBooks(books);
-    }
-    
-    private class BookClickListener implements ActionListener {
-        private Book book;
-
-        public BookClickListener(Book book) {
-            this.book = book;
-        }
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            // Open a BookGUI to show the details of the selected book
-            System.out.println("Show book detail!");
+        //add to jList
+        for(Book book: books){
+            String book_model = "" + book.getTitle() + " (Author: " + book.getAuthor() + ", Genre: " + book.getGenre() + ") ";   
+            
+            if(title != null && author == null && genre == null){
+                if(book.getTitle().toLowerCase().contains(title))listModel.addElement(book_model);
+            }
+            else if(author != null && title == null && genre == null){
+                if(book.getAuthor().toLowerCase().contains(author))listModel.addElement(book_model);
+            }
+            else if(genre != null && title == null && author == null){
+                if(book.getGenre().toLowerCase().contains(genre))listModel.addElement(book_model);
+            }
+            else{
+                listModel.addElement(book_model);       
+            }
         }
     }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel booklist_panel;
+    private javax.swing.JButton btn_search;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField keyword;
+    private javax.swing.JComboBox<String> search_filter;
+    private javax.swing.JPanel search_panel;
     // End of variables declaration//GEN-END:variables
 }
 

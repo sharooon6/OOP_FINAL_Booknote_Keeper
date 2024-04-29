@@ -59,7 +59,7 @@ public class AddBookGUI extends javax.swing.JPanel {
         jScrollPane3.setViewportBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jScrollPane3.setAutoscrolls(true);
 
-        jLabel1.setFont(new java.awt.Font("Cascadia Code", 0, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Cascadia Code", 0, 18)); // NOI18N
         jLabel1.setText("ADD A BOOK");
 
         jPanel2.setPreferredSize(new java.awt.Dimension(400, 42));
@@ -164,6 +164,7 @@ public class AddBookGUI extends javax.swing.JPanel {
         lbl_Title4.setText("REVIEW");
 
         txt_review.setColumns(20);
+        txt_review.setFont(new java.awt.Font("Cascadia Code", 0, 14)); // NOI18N
         txt_review.setRows(5);
         jScrollPane1.setViewportView(txt_review);
 
@@ -251,16 +252,16 @@ public class AddBookGUI extends javax.swing.JPanel {
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(271, 271, 271)
-                        .addComponent(jLabel1)
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jPanel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 2951, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(256, 256, 256)
                         .addComponent(btn_Save, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(287, 287, 287)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -279,7 +280,7 @@ public class AddBookGUI extends javax.swing.JPanel {
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(56, 56, 56)
                 .addComponent(btn_Save, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(385, Short.MAX_VALUE))
+                .addContainerGap(392, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addGap(184, 184, 184)
@@ -298,7 +299,7 @@ public class AddBookGUI extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 703, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 627, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -306,10 +307,6 @@ public class AddBookGUI extends javax.swing.JPanel {
     private void txt_authorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_authorActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_authorActionPerformed
-
-    private void txt_genreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_genreActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_genreActionPerformed
 
     
     //SAVE BUTTON
@@ -349,6 +346,10 @@ public class AddBookGUI extends javax.swing.JPanel {
     private void txt_notesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_notesActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_notesActionPerformed
+
+    private void txt_genreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_genreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_genreActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

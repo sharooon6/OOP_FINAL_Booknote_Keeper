@@ -20,7 +20,7 @@ public class MainGUI extends javax.swing.JFrame {
      * Creates new form MainGUI
      */
     
-     JPanel browse_panel;
+     BrowseGUI browse_panel;
      JPanel add_panel;
      JPanel notes_panel;
      private ArrayList<Book> books = new ArrayList<>();
@@ -233,17 +233,17 @@ public class MainGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_clearDataActionPerformed
 
     public void open_browse_gui() {
-        System.out.println("show all books");
+        System.out.println("open browse GUI");
         card_panel.removeAll();
         card_panel.add(browse_panel);
         card_panel.repaint();
         card_panel.revalidate();
         
-       
+        browse_panel.displayBooks(books,null,null,null);
     }
 	
     public void open_add_gui() {
-        System.out.println("add a new book");
+        System.out.println("open add GUI");
         card_panel.removeAll();
         card_panel.add(add_panel);
         card_panel.repaint();
@@ -251,7 +251,7 @@ public class MainGUI extends javax.swing.JFrame {
     }
 	
     public void open_notes_gui() {
-        System.out.println("show all notes");
+        System.out.println("open notes GUI");
         card_panel.removeAll();
         card_panel.add(notes_panel);
         card_panel.repaint();
