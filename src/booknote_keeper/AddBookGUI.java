@@ -4,6 +4,8 @@
  */
 package booknote_keeper;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author ALIENWARE
@@ -253,12 +255,12 @@ public class AddBookGUI extends javax.swing.JPanel {
                         .addGap(271, 271, 271)
                         .addComponent(jLabel1)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jPanel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 2951, Short.MAX_VALUE))
+                    .addComponent(jPanel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 2951, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(256, 256, 256)
+                        .addComponent(btn_Save, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(256, 256, 256)
-                .addComponent(btn_Save, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -319,12 +321,27 @@ public class AddBookGUI extends javax.swing.JPanel {
      * Books are saved into the file system. 
      */
     private void btn_SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SaveActionPerformed
-        title = txt_title.getText();
-        author = txt_author.getText();
-        genre = txt_genre.getText();
-        review = txt_review.getText();
-        Book newBook = new Book(title, review, author, genre);
-        BookManager.saveBook(newBook);
+        //check if title, genre, author are empty
+        if(txt_title.getText().isEmpty() || txt_author.getText().isEmpty() || txt_genre.getText().isEmpty()){
+            JOptionPane.showMessageDialog(jScrollPane3, "Title, Author, Genre cannot be empty!", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        else{
+            //save book object to file.
+            title = txt_title.getText();
+            author = txt_author.getText();
+            genre = txt_genre.getText();
+            review = txt_review.getText();
+            Book newBook = new Book(title, review, author, genre);
+            BookManager.saveBook(newBook);
+            
+            JOptionPane.showMessageDialog(jScrollPane3, "Book saved successfully!");
+
+            //reset all text fields
+            txt_title.setText("");
+            txt_author.setText("");
+            txt_genre.setText("");
+            txt_review.setText("");        
+        }
     }//GEN-LAST:event_btn_SaveActionPerformed
 
     

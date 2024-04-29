@@ -42,6 +42,7 @@ public class BrowseGUI extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         booklist_panel = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
 
         jPanel1.setLayout(new java.awt.BorderLayout());
 
@@ -50,7 +51,10 @@ public class BrowseGUI extends javax.swing.JPanel {
         jLabel3.setText("BROWSE ALL BOOKS");
         jPanel1.add(jLabel3, java.awt.BorderLayout.CENTER);
 
-        booklist_panel.setLayout(new javax.swing.BoxLayout(booklist_panel, javax.swing.BoxLayout.Y_AXIS));
+        booklist_panel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+
+        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+        booklist_panel.add(jScrollPane1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -68,7 +72,7 @@ public class BrowseGUI extends javax.swing.JPanel {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(booklist_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(546, Short.MAX_VALUE))
+                .addContainerGap(536, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
     
@@ -81,6 +85,7 @@ public class BrowseGUI extends javax.swing.JPanel {
      */
     public void displayBooks(ArrayList<Book> books){
         books = BookManager.loadBooks();
+        //booklist_panel.removeAll();
 
         for(Book book: books){
             String book_label = " " + book.getTitle() + " ( " + book.getAuthor() + "  " + book.getGenre() + ") ";
@@ -93,9 +98,10 @@ public class BrowseGUI extends javax.swing.JPanel {
             btn.setBorder(BorderFactory.createCompoundBorder(btn.getBorder(), new EmptyBorder(5,10,5,10)));
             //btn.addActionListener(new BookClickListener(book));
             booklist_panel.add(btn);
-            booklist_panel.repaint();
-            booklist_panel.revalidate();
         }
+        
+        booklist_panel.repaint();
+        booklist_panel.revalidate();
     }
     
     public void refreshBooks() {
@@ -121,6 +127,7 @@ public class BrowseGUI extends javax.swing.JPanel {
     private javax.swing.JPanel booklist_panel;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }
 

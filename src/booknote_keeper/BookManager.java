@@ -44,7 +44,7 @@ public class BookManager {
             for (File file : files) {
                 if (file.isFile() && file.getName().endsWith(".ser")) {
                     
-                    //System.out.println(file.getName());
+                    System.out.println(file.getName());
                     
                     try (FileInputStream f = new FileInputStream(file);
                          ObjectInputStream o = new ObjectInputStream(f)) {
