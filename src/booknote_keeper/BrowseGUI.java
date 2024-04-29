@@ -10,6 +10,8 @@ import java.awt.Component;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -66,7 +68,11 @@ public class BrowseGUI extends javax.swing.JPanel {
             }
         });
         
-        displayBooks(books,null,null,null); //display all books
+        //display all books
+        displayBooks(null,null,null);
+        
+        //enable double click to open book action.
+        OpenBook();
     }
 
     /**
@@ -85,6 +91,7 @@ public class BrowseGUI extends javax.swing.JPanel {
         search_filter = new javax.swing.JComboBox<>();
         keyword = new javax.swing.JTextField();
         btn_search = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         jPanel1.setLayout(new java.awt.BorderLayout());
 
@@ -95,7 +102,6 @@ public class BrowseGUI extends javax.swing.JPanel {
 
         booklist_panel.setLayout(new java.awt.BorderLayout());
 
-        search_panel.setAlignmentY(0.5F);
         search_panel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         search_filter.setFont(new java.awt.Font("Cascadia Code", 0, 14)); // NOI18N
@@ -116,6 +122,10 @@ public class BrowseGUI extends javax.swing.JPanel {
         });
         search_panel.add(btn_search, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 10, 90, 30));
 
+        jLabel1.setFont(new java.awt.Font("Cascadia Code", 0, 14)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Double Click on Book to Open");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -124,15 +134,20 @@ public class BrowseGUI extends javax.swing.JPanel {
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                 .addComponent(search_panel, javax.swing.GroupLayout.PREFERRED_SIZE, 720, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 720, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(245, 245, 245)
+                .addComponent(jLabel1))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(search_panel, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
+                .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(booklist_panel, javax.swing.GroupLayout.DEFAULT_SIZE, 507, Short.MAX_VALUE)
+                .addComponent(search_panel, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(booklist_panel, javax.swing.GroupLayout.DEFAULT_SIZE, 479, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -144,7 +159,7 @@ public class BrowseGUI extends javax.swing.JPanel {
      */
     private void btn_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_searchActionPerformed
         if(keyword.getText().isEmpty()){
-            displayBooks(books,null,null,null); 
+            displayBooks(null,null,null); 
         }
         else{
             String filter = search_filter.getSelectedItem().toString();
@@ -152,15 +167,15 @@ public class BrowseGUI extends javax.swing.JPanel {
 
             if(filter.equalsIgnoreCase("Title")){
                 //search by title
-                displayBooks(books,keyword.getText().toLowerCase(),null,null);
+                displayBooks(keyword.getText().toLowerCase(),null,null);
             }
             else if(filter.equalsIgnoreCase("Author")){
                 //search by author
-                displayBooks(books,null,keyword.getText().toLowerCase(),null);
+                displayBooks(null,keyword.getText().toLowerCase(),null);
             }
             else if(filter.equalsIgnoreCase("Genre")){
                 //search by genre
-                displayBooks(books,null,null,keyword.getText().toLowerCase());
+                displayBooks(null,null,keyword.getText().toLowerCase());
             }
         }
     }//GEN-LAST:event_btn_searchActionPerformed
@@ -175,7 +190,7 @@ public class BrowseGUI extends javax.swing.JPanel {
      * @param author 
      * @param genre 
      */
-    public void displayBooks(ArrayList<Book> books, String title, String author, String genre){
+    public void displayBooks(String title, String author, String genre){
         books = BookManager.loadBooks();
         listModel.clear();
         
@@ -197,11 +212,39 @@ public class BrowseGUI extends javax.swing.JPanel {
             }
         }
     }
-
+    
+    public void OpenBook(){
+        //double click to open list item - show individual book GUI
+        booklist.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
+                JList list = (JList)evt.getSource();
+                if (evt.getClickCount() == 2) {
+                    // Double-click detected
+                    int index = list.locationToIndex(evt.getPoint());
+                    if (index >= 0) {
+                        String selectedItem = list.getModel().getElementAt(index).toString();
+                        System.out.println("Double-clicked item: " + selectedItem);
+                        
+                        //open book GUI
+                        /**
+                         * based on the selectedItem string, get the Book object. 
+                         * trigger the card_layout open_book_gui() 
+                         * 
+                         */
+                        MainGUI mg = new MainGUI();
+                        mg.open_book_gui();
+                        
+                    }
+                } 
+            }
+        });
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel booklist_panel;
     private javax.swing.JButton btn_search;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField keyword;

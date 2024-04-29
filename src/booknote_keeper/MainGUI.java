@@ -23,7 +23,7 @@ public class MainGUI extends javax.swing.JFrame {
      BrowseGUI browse_panel;
      JPanel add_panel;
      JPanel notes_panel;
-     private ArrayList<Book> books = new ArrayList<>();
+     JPanel book_panel;
     
     public MainGUI() {
         initComponents();
@@ -39,6 +39,9 @@ public class MainGUI extends javax.swing.JFrame {
         
         notes_panel = new NotesGUI();
 	card_panel.add(notes_panel, "Notes");
+        
+        book_panel = new IndividualBookGUI();
+        card_panel.add(book_panel, "Book");
         
         
     }
@@ -151,15 +154,15 @@ public class MainGUI extends javax.swing.JFrame {
         button_panel.setLayout(button_panelLayout);
         button_panelLayout.setHorizontalGroup(
             button_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(button_panelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(button_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btn_AllBooks, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btn_AddBook, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btn_AllNotes, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btn_clearData, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE))
+                    .addComponent(btn_clearData, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE))
                 .addContainerGap())
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         button_panelLayout.setVerticalGroup(
             button_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -185,7 +188,7 @@ public class MainGUI extends javax.swing.JFrame {
         empty_panel.setLayout(empty_panelLayout);
         empty_panelLayout.setHorizontalGroup(
             empty_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 741, Short.MAX_VALUE)
+            .addGap(0, 759, Short.MAX_VALUE)
         );
         empty_panelLayout.setVerticalGroup(
             empty_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -200,9 +203,9 @@ public class MainGUI extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(button_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(card_panel, javax.swing.GroupLayout.PREFERRED_SIZE, 741, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(card_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -239,7 +242,7 @@ public class MainGUI extends javax.swing.JFrame {
         card_panel.repaint();
         card_panel.revalidate();
         
-        browse_panel.displayBooks(books,null,null,null);
+        browse_panel.displayBooks(null,null,null);
     }
 	
     public void open_add_gui() {
@@ -254,6 +257,14 @@ public class MainGUI extends javax.swing.JFrame {
         System.out.println("open notes GUI");
         card_panel.removeAll();
         card_panel.add(notes_panel);
+        card_panel.repaint();
+        card_panel.revalidate();
+    }
+    
+    public void open_book_gui(){
+        System.out.println("open individual book GUI");
+        card_panel.removeAll();
+        card_panel.add(book_panel);
         card_panel.repaint();
         card_panel.revalidate();
     }
