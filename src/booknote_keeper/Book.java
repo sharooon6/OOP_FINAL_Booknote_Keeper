@@ -17,6 +17,14 @@ public class Book implements Serializable {
         this.review = review;
         this.notes = new ArrayList<>();
     }
+    
+    public Book(){
+        this.title = "";
+        this.author = "";
+        this.genre = "";
+        this.review = "";
+        this.notes = new ArrayList<>();
+    }
 
     public void addNote(Note note){
         notes.add(note);

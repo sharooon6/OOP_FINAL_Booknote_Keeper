@@ -60,6 +60,47 @@ public class BookManager {
         return loadedBooks;
     }
     
+    
+    //load all books from file
+    public static Book loadOneBook(Book bookToLoad) {
+        Book book = new Book();
+        String title = "";
+        String author = "";
+        
+        File directory = new File("data");
+        File[] files = directory.listFiles();
+
+        if (files != null) {
+            for (File file : files) {
+                    String[] parts = file.getName().split("-");
+                    if (parts.length == 2) {
+                        title = parts[0];
+                        author = parts[1];
+                    }
+                    if(bookToLoad.getTitle().toLowerCase().equals(title.toLowerCase()) 
+                        && bookToLoad.getAuthor().toLowerCase().equals(author.toLowerCase())){
+                        
+                        try (FileInputStream f = new FileInputStream(file);
+                         ObjectInputStream o = new ObjectInputStream(f)) {
+
+                            book = (Book) o.readObject();
+
+                            System.out.println("Find the book!");
+                            break;
+                        
+                        } catch (IOException | ClassNotFoundException e) {
+                            System.err.println("Error loading book from file: " + file.getName());
+                            e.printStackTrace();
+                        }
+                        
+                    }
+
+            }
+        }
+        
+        return book;
+    }
+    
    
     
     public static void DeleteAllBooks() {

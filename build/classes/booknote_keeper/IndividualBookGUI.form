@@ -29,7 +29,7 @@
                           <Group type="102" attributes="0">
                               <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jLabel3" min="-2" pref="553" max="-2" attributes="0"/>
+                              <Component id="book_review" min="-2" pref="553" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
                               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
@@ -57,7 +57,7 @@
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="jLabel2" max="32767" attributes="0"/>
-                  <Component id="jLabel3" max="32767" attributes="0"/>
+                  <Component id="book_review" max="32767" attributes="0"/>
               </Group>
               <EmptySpace min="0" pref="453" max="32767" attributes="0"/>
           </Group>
@@ -166,7 +166,7 @@
         <Property name="text" type="java.lang.String" value="Review:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel3">
+    <Component class="javax.swing.JLabel" name="book_review">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Cascadia Code" size="14" style="0"/>

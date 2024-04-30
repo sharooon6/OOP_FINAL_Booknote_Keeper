@@ -35,12 +35,16 @@ public class BrowseGUI extends javax.swing.JPanel {
     private ArrayList<Book> books = new ArrayList<>();
     private JList<String> booklist;
     private DefaultListModel<String> listModel;
+    
+    MainGUI mg;
 
     /**
      * Creates new form BrowseGUI
      */
-    public BrowseGUI() {
+    public BrowseGUI(MainGUI mainGUI, IndividualBookGUI bookGUI) {
         initComponents();
+        
+        mg = mainGUI;
         
         //create booklist ui
         listModel = new DefaultListModel<>();
@@ -72,7 +76,7 @@ public class BrowseGUI extends javax.swing.JPanel {
         displayBooks(null,null,null);
         
         //enable double click to open book action.
-        OpenBook();
+        OpenBook(mainGUI, bookGUI);
     }
 
     /**
@@ -213,7 +217,7 @@ public class BrowseGUI extends javax.swing.JPanel {
         }
     }
     
-    public void OpenBook(){
+    public void OpenBook(MainGUI mainGUI, IndividualBookGUI bookGUI){
         //double click to open list item - show individual book GUI
         booklist.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
@@ -231,8 +235,21 @@ public class BrowseGUI extends javax.swing.JPanel {
                          * trigger the card_layout open_book_gui() 
                          * 
                          */
-                        MainGUI mg = new MainGUI();
-                        mg.open_book_gui();
+                                               
+                        Book bookToOpen = new Book();
+                        String title, author, genre, review;
+                        
+                       
+
+                        for(Book b : books){
+                            
+                        }
+                        
+                        
+                        
+                        mainGUI.open_book_gui();
+                        //bookGUI.SetBookInfo(title, author, genre, review);
+                        
                         
                     }
                 } 

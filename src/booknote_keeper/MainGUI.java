@@ -23,7 +23,7 @@ public class MainGUI extends javax.swing.JFrame {
      BrowseGUI browse_panel;
      JPanel add_panel;
      JPanel notes_panel;
-     JPanel book_panel;
+     IndividualBookGUI book_panel;
     
     public MainGUI() {
         initComponents();
@@ -31,7 +31,10 @@ public class MainGUI extends javax.swing.JFrame {
         Image icon = new ImageIcon(this.getClass().getResource("/icons/open-book.png")).getImage();
         this.setIconImage(icon);
         
-        browse_panel = new BrowseGUI();
+        book_panel = new IndividualBookGUI();
+        card_panel.add(book_panel, "Book");
+        
+        browse_panel = new BrowseGUI(this, book_panel);
 	card_panel.add(browse_panel, "Browse");
         
         add_panel = new AddBookGUI();
@@ -40,8 +43,7 @@ public class MainGUI extends javax.swing.JFrame {
         notes_panel = new NotesGUI();
 	card_panel.add(notes_panel, "Notes");
         
-        book_panel = new IndividualBookGUI();
-        card_panel.add(book_panel, "Book");
+        
         
         
     }
