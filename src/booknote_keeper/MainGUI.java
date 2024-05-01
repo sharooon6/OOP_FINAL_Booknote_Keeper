@@ -31,7 +31,7 @@ public class MainGUI extends javax.swing.JFrame {
         Image icon = new ImageIcon(this.getClass().getResource("/icons/open-book.png")).getImage();
         this.setIconImage(icon);
         
-        book_panel = new IndividualBookGUI();
+        book_panel = new IndividualBookGUI(this);
         card_panel.add(book_panel, "Book");
         
         browse_panel = new BrowseGUI(this, book_panel);

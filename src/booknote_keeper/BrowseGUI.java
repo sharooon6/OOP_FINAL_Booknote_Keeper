@@ -13,6 +13,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.DefaultListCellRenderer;
@@ -88,6 +89,7 @@ public class BrowseGUI extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenuItem1 = new javax.swing.JMenuItem();
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         booklist_panel = new javax.swing.JPanel();
@@ -96,6 +98,8 @@ public class BrowseGUI extends javax.swing.JPanel {
         keyword = new javax.swing.JTextField();
         btn_search = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+
+        jMenuItem1.setText("jMenuItem1");
 
         jPanel1.setLayout(new java.awt.BorderLayout());
 
@@ -189,7 +193,6 @@ public class BrowseGUI extends javax.swing.JPanel {
      * Load a list of books from the file. 
      * Go through the list and assign a button to each book with title, author, genre written on the label. 
      * Each button has an eventlistener that can open a bookGUI to show the detail content.
-     * @param books 
      * @param title 
      * @param author 
      * @param genre 
@@ -217,8 +220,17 @@ public class BrowseGUI extends javax.swing.JPanel {
         }
     }
     
+    
+    /**
+     * double click to open list item - show individual book GUI
+     * use list name to extract title, author, genre 
+     * use this info to compare to the loaded book, get the specific book object
+     * set book info for the bookGUI page
+     * @param mainGUI
+     * @param bookGUI 
+     */
     public void OpenBook(MainGUI mainGUI, IndividualBookGUI bookGUI){
-        //double click to open list item - show individual book GUI
+        
         booklist.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
                 JList list = (JList)evt.getSource();
@@ -230,31 +242,53 @@ public class BrowseGUI extends javax.swing.JPanel {
                         System.out.println("Double-clicked item: " + selectedItem);
                         
                         //open book GUI
-                        /**
-                         * based on the selectedItem string, get the Book object. 
-                         * trigger the card_layout open_book_gui() 
-                         * 
-                         */
-                                               
                         Book bookToOpen = new Book();
                         String title, author, genre, review;
+                        ArrayList<String> extractedInfo = extractInfo(selectedItem);
+                        title = extractedInfo.get(0);
+                        author = extractedInfo.get(1);
+                        genre = extractedInfo.get(2);
                         
-                       
+                        System.out.println("title:" + title + ", author: " + author + ", genre: " + genre);
+                        
+                        //search books for the corresponding book to open
 
                         for(Book b : books){
-                            
+                            if(b.getTitle().equalsIgnoreCase(title) && b.getAuthor().equalsIgnoreCase(author)){
+                                bookToOpen = b;
+                                break;
+                            }
                         }
                         
-                        
-                        
+                        review = bookToOpen.getReview();
                         mainGUI.open_book_gui();
-                        //bookGUI.SetBookInfo(title, author, genre, review);
-                        
-                        
+                        bookGUI.SetBookInfo(title, author, genre, review);
                     }
                 } 
             }
         });
+    }
+    
+    
+    public ArrayList<String> extractInfo(String input){
+        ArrayList<String> info = new ArrayList<>();
+        
+        // Extracting title
+        String title = input.substring(0, input.indexOf("("));
+        info.add(title.trim());
+
+        // Extracting author
+        int authorStartIndex = input.indexOf("Author: ") + "Author: ".length();
+        int authorEndIndex = input.indexOf(",", authorStartIndex);
+        String author = input.substring(authorStartIndex, authorEndIndex);
+        info.add(author.trim());
+
+        // Extracting genre
+        int genreStartIndex = input.indexOf("Genre: ") + "Genre: ".length();
+        String genre = input.substring(genreStartIndex, input.length()-2);
+        info.add(genre.trim());
+
+        return info;
     }
     
 
@@ -263,6 +297,7 @@ public class BrowseGUI extends javax.swing.JPanel {
     private javax.swing.JButton btn_search;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField keyword;
     private javax.swing.JComboBox<String> search_filter;

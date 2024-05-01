@@ -9,13 +9,15 @@ package booknote_keeper;
  * @author ALIENWARE
  */
 public class IndividualBookGUI extends javax.swing.JPanel {
-
+    MainGUI mg;
     Book book;
     /**
      * Creates new form IndividualBookGUI
      */
-    public IndividualBookGUI() {
+    public IndividualBookGUI(MainGUI mainGUI) {
         initComponents();
+        
+        mg = mainGUI;
     }
 
     /**
@@ -30,7 +32,7 @@ public class IndividualBookGUI extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         book_title = new javax.swing.JLabel();
         btn_edit = new javax.swing.JButton();
-        btn_edit1 = new javax.swing.JButton();
+        btn_back = new javax.swing.JButton();
         book_author = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         book_genre = new javax.swing.JLabel();
@@ -52,11 +54,11 @@ public class IndividualBookGUI extends javax.swing.JPanel {
             }
         });
 
-        btn_edit1.setFont(new java.awt.Font("Cascadia Code", 0, 14)); // NOI18N
-        btn_edit1.setText("Back");
-        btn_edit1.addActionListener(new java.awt.event.ActionListener() {
+        btn_back.setFont(new java.awt.Font("Cascadia Code", 0, 14)); // NOI18N
+        btn_back.setText("Back");
+        btn_back.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_edit1ActionPerformed(evt);
+                btn_backActionPerformed(evt);
             }
         });
 
@@ -67,10 +69,10 @@ public class IndividualBookGUI extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addComponent(btn_edit)
-                .addGap(153, 153, 153)
-                .addComponent(book_title, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btn_edit1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(book_title, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(btn_back)
                 .addGap(30, 30, 30))
         );
         jPanel1Layout.setVerticalGroup(
@@ -78,7 +80,7 @@ public class IndividualBookGUI extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                 .addComponent(book_title, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
                 .addComponent(btn_edit)
-                .addComponent(btn_edit1))
+                .addComponent(btn_back))
         );
 
         book_author.setFont(new java.awt.Font("Cascadia Code", 0, 14)); // NOI18N
@@ -103,22 +105,21 @@ public class IndividualBookGUI extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
+                .addGap(17, 17, 17)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(271, 271, 271)
-                        .addComponent(book_author, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(book_review, javax.swing.GroupLayout.PREFERRED_SIZE, 553, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(17, 17, 17)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(book_review, javax.swing.GroupLayout.PREFERRED_SIZE, 553, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(book_genre, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(book_genre, javax.swing.GroupLayout.PREFERRED_SIZE, 447, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(34, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(book_author, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -141,14 +142,18 @@ public class IndividualBookGUI extends javax.swing.JPanel {
     private void btn_editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_editActionPerformed
-
-    private void btn_edit1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_edit1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_edit1ActionPerformed
+    
+    /**
+     * Reload the BrowseGUI
+     * @param evt 
+     */
+    private void btn_backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_backActionPerformed
+        mg.open_browse_gui();
+    }//GEN-LAST:event_btn_backActionPerformed
 
     public void SetBookInfo(String title, String author, String genre, String review){
         book_title.setText(title);
-        book_author.setText(author);
+        book_author.setText("By " + author);
         book_genre.setText(genre);
         book_review.setText(review);
     }
@@ -158,8 +163,8 @@ public class IndividualBookGUI extends javax.swing.JPanel {
     private javax.swing.JLabel book_genre;
     private javax.swing.JLabel book_review;
     private javax.swing.JLabel book_title;
+    private javax.swing.JButton btn_back;
     private javax.swing.JButton btn_edit;
-    private javax.swing.JButton btn_edit1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
