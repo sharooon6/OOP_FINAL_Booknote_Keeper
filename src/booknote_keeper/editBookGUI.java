@@ -10,18 +10,23 @@ import javax.swing.JOptionPane;
  *
  * @author ALIENWARE
  */
-public class AddBookGUI extends javax.swing.JPanel {
+public class EditBookGUI extends javax.swing.JPanel {
 
     private String title;
     private String author;
     private String genre;
     private String review;
-    
+     MainGUI mg;
     /**
      * Creates new form AddBookGUI
      */
-    public AddBookGUI() {
+    public EditBookGUI(MainGUI mg,String title,String author,String genre,String review) {
         initComponents();
+        this.mg=mg;
+        txt_title.setText(title);
+        txt_author.setText(author);
+        txt_genre.setText(genre);
+        txt_review.setText(review);
     }
 
     /**
@@ -60,7 +65,7 @@ public class AddBookGUI extends javax.swing.JPanel {
         jScrollPane3.setAutoscrolls(true);
 
         jLabel1.setFont(new java.awt.Font("Cascadia Code", 0, 18)); // NOI18N
-        jLabel1.setText("ADD A BOOK");
+        jLabel1.setText("EDIT BOOK");
 
         jPanel2.setPreferredSize(new java.awt.Dimension(400, 42));
 
@@ -332,7 +337,7 @@ public class AddBookGUI extends javax.swing.JPanel {
             BookManager.saveBook(newBook);
             
             JOptionPane.showMessageDialog(jScrollPane3, "Book saved successfully!");
-
+            mg.open_browse_gui();
             //reset all text fields
             txt_title.setText("");
             txt_author.setText("");

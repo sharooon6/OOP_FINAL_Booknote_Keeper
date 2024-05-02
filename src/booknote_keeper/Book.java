@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Book implements Serializable {  
+
     private String title;
     private String review;
     private String author;
@@ -26,6 +27,7 @@ public class Book implements Serializable {
         this.notes = new ArrayList<>();
     }
 
+    
     public void addNote(Note note){
         notes.add(note);
         
@@ -72,5 +74,4 @@ public class Book implements Serializable {
         System.out.println("Title: " + this.title + ", Author: " + this.author + ", Genre " + this.genre + ", Review: " + this.review);
     }
     
-   
 }

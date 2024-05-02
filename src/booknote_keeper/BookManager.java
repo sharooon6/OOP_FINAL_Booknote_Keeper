@@ -5,6 +5,15 @@ import java.util.ArrayList;
 
 public class BookManager {
     
+    
+    public static boolean same(Book book){
+      Book obook= loadOneBook(book);
+      if(obook.getTitle().equals(book.getTitle())){
+          return true;
+      }
+      return false;
+    }
+    
     //save a book object to file.
     public static void saveBook(Book book){
         
@@ -75,7 +84,7 @@ public class BookManager {
                     String[] parts = file.getName().split("-");
                     if (parts.length == 2) {
                         title = parts[0];
-                        author = parts[1];
+                        author = parts[1].replace(".ser", "");
                     }
                     if(bookToLoad.getTitle().toLowerCase().equals(title.toLowerCase()) 
                         && bookToLoad.getAuthor().toLowerCase().equals(author.toLowerCase())){

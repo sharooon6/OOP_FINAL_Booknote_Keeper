@@ -329,15 +329,22 @@ public class AddBookGUI extends javax.swing.JPanel {
             genre = txt_genre.getText();
             review = txt_review.getText();
             Book newBook = new Book(title, review, author, genre);
-            BookManager.saveBook(newBook);
-            
-            JOptionPane.showMessageDialog(jScrollPane3, "Book saved successfully!");
+            boolean same= BookManager.same(newBook);
+            if(same){
+                JOptionPane.showMessageDialog(jScrollPane3, "The book is already in System. Please enter another book");
+            }else{
+                BookManager.saveBook(newBook); 
+                  JOptionPane.showMessageDialog(jScrollPane3, "Book saved successfully!");
 
             //reset all text fields
             txt_title.setText("");
             txt_author.setText("");
             txt_genre.setText("");
-            txt_review.setText("");        
+            txt_review.setText("");   
+            }
+      
+            
+       
         }
     }//GEN-LAST:event_btn_SaveActionPerformed
 

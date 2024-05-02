@@ -117,6 +117,11 @@ public class BrowseGUI extends javax.swing.JPanel {
         search_panel.add(search_filter, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 112, 30));
 
         keyword.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        keyword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                keywordActionPerformed(evt);
+            }
+        });
         search_panel.add(keyword, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 10, 440, 30));
 
         btn_search.setBackground(java.awt.Color.darkGray);
@@ -187,6 +192,10 @@ public class BrowseGUI extends javax.swing.JPanel {
             }
         }
     }//GEN-LAST:event_btn_searchActionPerformed
+
+    private void keywordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_keywordActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_keywordActionPerformed
     
     
     /**

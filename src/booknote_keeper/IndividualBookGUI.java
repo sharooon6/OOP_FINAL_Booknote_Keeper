@@ -140,7 +140,9 @@ public class IndividualBookGUI extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editActionPerformed
+
         // TODO add your handling code here:
+        mg.open_edit_gui(book_title.getText(),book_author.getText(),book_genre.getText(),book_review.getText());
     }//GEN-LAST:event_btn_editActionPerformed
     
     /**
@@ -153,7 +155,7 @@ public class IndividualBookGUI extends javax.swing.JPanel {
 
     public void SetBookInfo(String title, String author, String genre, String review){
         book_title.setText(title);
-        book_author.setText("By " + author);
+        book_author.setText(author);
         book_genre.setText(genre);
         book_review.setText(review);
     }
