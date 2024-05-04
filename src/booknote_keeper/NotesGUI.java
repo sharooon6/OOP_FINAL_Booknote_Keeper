@@ -27,8 +27,7 @@ public class NotesGUI extends javax.swing.JPanel {
     private ArrayList<Book> books = new ArrayList<>();
     private JList<String> booklist;
     private DefaultListModel<String> listModel;
-    private JTextArea textArea;
-    
+
     MainGUI mg;
     /**
      * Creates new form NotesGUI
