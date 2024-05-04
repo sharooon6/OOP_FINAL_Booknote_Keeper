@@ -271,7 +271,7 @@ public class BrowseGUI extends javax.swing.JPanel {
                         
                         review = bookToOpen.getReview();
                         mainGUI.open_book_gui();
-                        bookGUI.SetBookInfo(title, author, genre, review);
+                        bookGUI.setBook(bookToOpen);
                     }
                 } 
             }

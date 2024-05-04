@@ -235,7 +235,7 @@ public class MainGUI extends javax.swing.JFrame {
 
     private void btn_clearDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_clearDataActionPerformed
         System.out.println("Clear all data from the folder!");
-        BookManager.DeleteAllBooks();
+        BookManager.deleteAllBooks();
     }//GEN-LAST:event_btn_clearDataActionPerformed
 
     public void open_browse_gui() {

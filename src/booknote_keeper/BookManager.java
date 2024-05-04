@@ -31,7 +31,8 @@ public class BookManager {
                 o.writeObject(book);
 
                 System.out.println("Book saved successfully.");
-
+                f.close();
+                o.close();
         } catch (FileNotFoundException e) {
                 System.err.println("File not found: " + e.getMessage());
                 e.printStackTrace();
@@ -59,6 +60,8 @@ public class BookManager {
 
                         Book book = (Book) o.readObject();
                         loadedBooks.add(book);
+                        f.close();
+                        o.close();
                     } catch (IOException | ClassNotFoundException e) {
                         System.err.println("Error loading book from file: " + file.getName());
                         e.printStackTrace();
@@ -70,7 +73,7 @@ public class BookManager {
     }
     
     
-    //load all books from file
+    //load one book from file
     public static Book loadOneBook(Book bookToLoad) {
         Book book = new Book();
         String title = "";
@@ -95,6 +98,8 @@ public class BookManager {
                             book = (Book) o.readObject();
 
                             System.out.println("Find the book!");
+                            f.close();
+                            o.close();
                             break;
                         
                         } catch (IOException | ClassNotFoundException e) {
@@ -112,25 +117,29 @@ public class BookManager {
     
    
     
-    public static void DeleteAllBooks() {
+    public static void deleteAllBooks() {
         
         File directory = new File("data");
         File[] files = directory.listFiles();
 
         if (files != null) {
             for (File file : files) {
-                if (file.isFile() && file.getName().endsWith(".ser")) {
-                    if (file.delete()) {
-                        System.out.println("Deleted: " + file.getAbsolutePath());
-                    } else {
-                        System.err.println("Failed to delete: " + file.getAbsolutePath());
-                    }
-                }
+                deleteBook(file);
             }
         }
 
     }
     
+    
+    public static void deleteBook(File file) {
+        if (file.isFile() && file.exists() && file.getName().endsWith(".ser")) {
+            if (file.delete()) {
+                System.out.println("Deleted: " + file.getAbsolutePath());
+            } else {
+                System.err.println("Failed to delete: " + file.getAbsolutePath());
+            }
+        }
+    }
     
 
 

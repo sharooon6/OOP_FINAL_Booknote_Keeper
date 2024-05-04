@@ -4,6 +4,7 @@
  */
 package booknote_keeper;
 
+import java.io.*;
 /**
  *
  * @author ALIENWARE
@@ -33,6 +34,7 @@ public class IndividualBookGUI extends javax.swing.JPanel {
         book_title = new javax.swing.JLabel();
         btn_edit = new javax.swing.JButton();
         btn_back = new javax.swing.JButton();
+        btn_delete = new javax.swing.JButton();
         book_author = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         book_genre = new javax.swing.JLabel();
@@ -62,6 +64,14 @@ public class IndividualBookGUI extends javax.swing.JPanel {
             }
         });
 
+        btn_delete.setFont(new java.awt.Font("Cascadia Code", 0, 14)); // NOI18N
+        btn_delete.setLabel("Delete");
+        btn_delete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_deleteActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -70,7 +80,9 @@ public class IndividualBookGUI extends javax.swing.JPanel {
                 .addGap(22, 22, 22)
                 .addComponent(btn_edit)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(book_title, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btn_delete)
+                .addGap(18, 18, 18)
+                .addComponent(book_title, javax.swing.GroupLayout.DEFAULT_SIZE, 345, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(btn_back)
                 .addGap(30, 30, 30))
@@ -80,7 +92,8 @@ public class IndividualBookGUI extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                 .addComponent(book_title, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
                 .addComponent(btn_edit)
-                .addComponent(btn_back))
+                .addComponent(btn_back)
+                .addComponent(btn_delete))
         );
 
         book_author.setFont(new java.awt.Font("Cascadia Code", 0, 14)); // NOI18N
@@ -153,11 +166,19 @@ public class IndividualBookGUI extends javax.swing.JPanel {
         mg.open_browse_gui();
     }//GEN-LAST:event_btn_backActionPerformed
 
-    public void SetBookInfo(String title, String author, String genre, String review){
-        book_title.setText(title);
-        book_author.setText(author);
-        book_genre.setText(genre);
-        book_review.setText(review);
+    private void btn_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteActionPerformed
+        String filepath = "data/" + book.getTitle() + "-" + book.getAuthor() + ".ser";
+        File file = new File(filepath);
+        BookManager.deleteBook(file);
+        mg.open_browse_gui();
+    }//GEN-LAST:event_btn_deleteActionPerformed
+
+    public void setBook(Book book){
+        this.book = book;
+        book_title.setText(book.getTitle());
+        book_author.setText(book.getAuthor());
+        book_genre.setText(book.getGenre());
+        book_review.setText(book.getReview());
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -166,6 +187,7 @@ public class IndividualBookGUI extends javax.swing.JPanel {
     private javax.swing.JLabel book_review;
     private javax.swing.JLabel book_title;
     private javax.swing.JButton btn_back;
+    private javax.swing.JButton btn_delete;
     private javax.swing.JButton btn_edit;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
