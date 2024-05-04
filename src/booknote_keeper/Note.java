@@ -1,13 +1,15 @@
 package booknote_keeper;
 
+import java.io.Serializable;
 
-public class Note {
+public class Note implements Serializable {
     private String text;
     private int pageNumber;
 
-    public Note(String text, int pageNumber){
+    public Note(String text){
         this.text = text;
-        this.pageNumber = pageNumber;
+        this.pageNumber = 0;
+        //this.pageNumber = pageNumber;
     }
 
     public String getText(){

@@ -155,7 +155,7 @@ public class IndividualBookGUI extends javax.swing.JPanel {
     private void btn_editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editActionPerformed
 
         // TODO add your handling code here:
-        mg.open_edit_gui(book_title.getText(),book_author.getText(),book_genre.getText(),book_review.getText());
+        mg.open_edit_gui(book);
     }//GEN-LAST:event_btn_editActionPerformed
     
     /**

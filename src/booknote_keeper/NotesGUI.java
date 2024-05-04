@@ -4,17 +4,80 @@
  */
 package booknote_keeper;
 
+import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.Font;
+import java.util.ArrayList;
+import javax.swing.BorderFactory;
+import javax.swing.DefaultListCellRenderer;
+import javax.swing.DefaultListModel;
+import javax.swing.JList;
+import javax.swing.JScrollPane;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+
 /**
  *
  * @author ALIENWARE
  */
 public class NotesGUI extends javax.swing.JPanel {
 
+    private ArrayList<Book> books = new ArrayList<>();
+    private JList<String> booklist;
+    private DefaultListModel<String> listModel;
+    
+    MainGUI mg;
     /**
      * Creates new form NotesGUI
      */
-    public NotesGUI() {
+    public NotesGUI(MainGUI mainGUI) {
         initComponents();
+        
+        mg = mainGUI;
+        
+        //create booklist ui
+        listModel = new DefaultListModel<>();
+        booklist = new JList<>(listModel);
+        JScrollPane scrollPane = new JScrollPane(booklist);
+        
+        //modify the UI
+        booklist.setOpaque(false);
+        scrollPane.setOpaque(false);
+        booklist.setBorder(new EmptyBorder(5,5,5,5));
+        notelist_panel.add(scrollPane, BorderLayout.CENTER); 
+        
+        booklist.setCellRenderer(new DefaultListCellRenderer() {
+            private int padding = 5; 
+            private Font font = new Font("Cascadia Code", Font.PLAIN, 14); // Customize the font here
+
+            @Override
+            public Component getListCellRendererComponent(JList<?> list, Object value, int index,
+                    boolean isSelected, boolean cellHasFocus) {
+                Component c = super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+
+                setFont(font);
+                setBorder(BorderFactory.createEmptyBorder(padding, 0, 0, 0));
+                return c;
+            }
+        });
+        
+        displayNotes();
+    }
+    
+    public void displayNotes(){
+        books = BookManager.loadBooks();
+        listModel.clear();
+        
+        //add to jList
+        for(Book book: books){
+            String bookLabel = "Book: " + book.getTitle() + " (Author: " + book.getAuthor() + ", Genre: " + book.getGenre() + ") ";
+            listModel.addElement(bookLabel);
+            ArrayList<Note> notes = book.getNotes();
+            for(Note note: notes){
+                String noteText = "     " + note.getText();
+                listModel.addElement(noteText);   
+            }
+        }
     }
 
     /**
@@ -28,6 +91,7 @@ public class NotesGUI extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
+        notelist_panel = new javax.swing.JPanel();
 
         jPanel1.setLayout(new java.awt.BorderLayout());
 
@@ -36,17 +100,22 @@ public class NotesGUI extends javax.swing.JPanel {
         jLabel3.setText("BROWSE ALL NOTES");
         jPanel1.add(jLabel3, java.awt.BorderLayout.CENTER);
 
+        notelist_panel.setLayout(new java.awt.BorderLayout());
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 833, Short.MAX_VALUE)
+            .addComponent(notelist_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 833, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 616, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(60, 60, 60)
+                .addComponent(notelist_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -58,5 +127,6 @@ public class NotesGUI extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel notelist_panel;
     // End of variables declaration//GEN-END:variables
 }

@@ -186,9 +186,9 @@ public class AddBookGUI extends javax.swing.JPanel {
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addGap(32, 32, 32)
                 .addComponent(lbl_Title6, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(63, 63, 63)
+                .addGap(58, 58, 58)
                 .addComponent(txt_notes, javax.swing.GroupLayout.PREFERRED_SIZE, 421, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(143, Short.MAX_VALUE))
+                .addContainerGap(148, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -329,6 +329,8 @@ public class AddBookGUI extends javax.swing.JPanel {
             genre = txt_genre.getText();
             review = txt_review.getText();
             Book newBook = new Book(title, review, author, genre);
+            Note note = new Note(txt_notes.getText());
+            newBook.addNote(note);
             boolean same= BookManager.same(newBook);
             if(same){
                 JOptionPane.showMessageDialog(jScrollPane3, "The book is already in System. Please enter another book");
@@ -340,7 +342,8 @@ public class AddBookGUI extends javax.swing.JPanel {
             txt_title.setText("");
             txt_author.setText("");
             txt_genre.setText("");
-            txt_review.setText("");   
+            txt_review.setText(""); 
+            txt_notes.setText("");
             }
       
             

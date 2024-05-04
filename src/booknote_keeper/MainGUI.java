@@ -23,7 +23,7 @@ public class MainGUI extends javax.swing.JFrame {
      BrowseGUI browse_panel;
      JPanel add_panel;
      EditBookGUI edit_book_panel;
-     JPanel notes_panel;
+     NotesGUI notes_panel;
      IndividualBookGUI book_panel;
     
     public MainGUI() {
@@ -41,7 +41,7 @@ public class MainGUI extends javax.swing.JFrame {
         add_panel = new AddBookGUI();
 	card_panel.add(add_panel, "Add");
         
-        notes_panel = new NotesGUI();
+        notes_panel = new NotesGUI(this);
 	card_panel.add(notes_panel, "Notes");
 
         
@@ -255,9 +255,9 @@ public class MainGUI extends javax.swing.JFrame {
         card_panel.repaint();
         card_panel.revalidate();
     }
-        public void open_edit_gui(String book_title,String book_author,String book_genre,String book_review) {
+    public void open_edit_gui(Book book) {
                     
-        edit_book_panel = new EditBookGUI(this,book_title, book_author, book_genre, book_review);
+        edit_book_panel = new EditBookGUI(this, book);
         System.out.println("open edit GUI");
         card_panel.removeAll();
         card_panel.add(edit_book_panel);
@@ -271,6 +271,8 @@ public class MainGUI extends javax.swing.JFrame {
         card_panel.add(notes_panel);
         card_panel.repaint();
         card_panel.revalidate();
+        
+        notes_panel.displayNotes();
     }
     
     public void open_book_gui(){

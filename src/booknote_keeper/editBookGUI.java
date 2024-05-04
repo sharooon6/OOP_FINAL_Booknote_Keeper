@@ -5,7 +5,7 @@
 package booknote_keeper;
 
 import javax.swing.JOptionPane;
-
+import java.io.*;
 /**
  *
  * @author ALIENWARE
@@ -16,17 +16,19 @@ public class EditBookGUI extends javax.swing.JPanel {
     private String author;
     private String genre;
     private String review;
+    private Book book;
      MainGUI mg;
     /**
      * Creates new form AddBookGUI
      */
-    public EditBookGUI(MainGUI mg,String title,String author,String genre,String review) {
+    public EditBookGUI(MainGUI mg,Book book) {
         initComponents();
         this.mg=mg;
-        txt_title.setText(title);
-        txt_author.setText(author);
-        txt_genre.setText(genre);
-        txt_review.setText(review);
+        this.book = book;
+        txt_title.setText(book.getTitle());
+        txt_author.setText(book.getAuthor());
+        txt_genre.setText(book.getGenre());
+        txt_review.setText(book.getReview());
     }
 
     /**
@@ -329,12 +331,23 @@ public class EditBookGUI extends javax.swing.JPanel {
         }
         else{
             //save book object to file.
-            title = txt_title.getText();
-            author = txt_author.getText();
-            genre = txt_genre.getText();
-            review = txt_review.getText();
-            Book newBook = new Book(title, review, author, genre);
-            BookManager.saveBook(newBook);
+            String oldPath = "data/" + book.getTitle() + "-" + book.getAuthor() + ".ser";
+            book.setTitle(txt_title.getText());
+            book.setAuthor(txt_author.getText());
+            book.setGenre(txt_genre.getText());
+            book.setReview(txt_review.getText());
+            if(!txt_notes.getText().isEmpty()){
+                Note note = new Note(txt_notes.getText());
+                book.addNote(note);
+            }
+            boolean same= BookManager.same(book);
+            if(same){
+                BookManager.saveBook(book);
+            }else{
+                File oldFile = new File(oldPath);
+                BookManager.deleteBook(oldFile);
+                BookManager.saveBook(book);
+            }
             
             JOptionPane.showMessageDialog(jScrollPane3, "Book saved successfully!");
             mg.open_browse_gui();
@@ -342,7 +355,8 @@ public class EditBookGUI extends javax.swing.JPanel {
             txt_title.setText("");
             txt_author.setText("");
             txt_genre.setText("");
-            txt_review.setText("");        
+            txt_review.setText("");
+            txt_notes.setText("");
         }
     }//GEN-LAST:event_btn_SaveActionPerformed
 

@@ -7,6 +7,6 @@ public class NotesManager {
     }
 
     public void addNoteToBook(Book book, Note note){
-            book.addNote(note);
+        book.addNote(note);
     }
 }
