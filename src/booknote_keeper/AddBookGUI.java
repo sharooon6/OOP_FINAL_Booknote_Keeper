@@ -12,11 +12,8 @@ import javax.swing.JOptionPane;
  */
 public class AddBookGUI extends javax.swing.JPanel {
 
-    private String title;
-    private String author;
-    private String genre;
-    private String review;
-    
+    private Book newBook;
+
     /**
      * Creates new form AddBookGUI
      */
@@ -52,7 +49,7 @@ public class AddBookGUI extends javax.swing.JPanel {
         jPanel8 = new javax.swing.JPanel();
         lbl_Title6 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        txt_review1 = new javax.swing.JTextArea();
+        text_notes = new javax.swing.JTextArea();
         btn_Save = new javax.swing.JButton();
 
         jScrollPane3.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -205,13 +202,13 @@ public class AddBookGUI extends javax.swing.JPanel {
         jScrollPane2.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPane2.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
-        txt_review1.setColumns(20);
-        txt_review1.setFont(new java.awt.Font("Cascadia Code", 0, 14)); // NOI18N
-        txt_review1.setLineWrap(true);
-        txt_review1.setRows(5);
-        txt_review1.setWrapStyleWord(true);
-        txt_review1.setMargin(new java.awt.Insets(12, 16, 12, 16));
-        jScrollPane2.setViewportView(txt_review1);
+        text_notes.setColumns(20);
+        text_notes.setFont(new java.awt.Font("Cascadia Code", 0, 14)); // NOI18N
+        text_notes.setLineWrap(true);
+        text_notes.setRows(5);
+        text_notes.setWrapStyleWord(true);
+        text_notes.setMargin(new java.awt.Insets(12, 16, 12, 16));
+        jScrollPane2.setViewportView(text_notes);
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -333,13 +330,8 @@ public class AddBookGUI extends javax.swing.JPanel {
         }
         else{
             //save book object to file.
-            title = txt_title.getText();
-            author = txt_author.getText();
-            genre = txt_genre.getText();
-            review = txt_review.getText();
-            Book newBook = new Book(title, review, author, genre);
-            Note note = new Note(txt_review1.getText());
-            newBook.addNote(note);
+            newBook = new Book(txt_title.getText(), txt_review.getText(), txt_author.getText(), txt_genre.getText());
+            newBook.addNote(new Note(text_notes.getText()));
             boolean same= BookManager.same(newBook);
             if(same){
                 JOptionPane.showMessageDialog(jScrollPane3, "The book is already in System. Please enter another book");
@@ -352,7 +344,7 @@ public class AddBookGUI extends javax.swing.JPanel {
                 txt_author.setText("");
                 txt_genre.setText("");
                 txt_review.setText("");
-                txt_review1.setText("");
+                text_notes.setText("");
             }
 
         }
@@ -387,10 +379,10 @@ public class AddBookGUI extends javax.swing.JPanel {
     private javax.swing.JLabel lbl_Title2;
     private javax.swing.JLabel lbl_Title4;
     private javax.swing.JLabel lbl_Title6;
+    private javax.swing.JTextArea text_notes;
     private javax.swing.JTextField txt_author;
     private javax.swing.JTextField txt_genre;
     private javax.swing.JTextArea txt_review;
-    private javax.swing.JTextArea txt_review1;
     private javax.swing.JTextField txt_title;
     // End of variables declaration//GEN-END:variables
 }

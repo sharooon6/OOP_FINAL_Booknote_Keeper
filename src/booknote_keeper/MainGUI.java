@@ -20,11 +20,11 @@ public class MainGUI extends javax.swing.JFrame {
      * Creates new form MainGUI
      */
     
-     BrowseGUI browse_panel;
-     JPanel add_panel;
-     EditBookGUI edit_book_panel;
-     NotesGUI notes_panel;
-     IndividualBookGUI book_panel;
+     private BrowseGUI browse_panel;
+     private AddBookGUI add_panel;
+     private EditBookGUI edit_book_panel;
+     private NotesGUI notes_panel;
+     private IndividualBookGUI book_panel;
     
     public MainGUI() {
         initComponents();
@@ -44,9 +44,6 @@ public class MainGUI extends javax.swing.JFrame {
         notes_panel = new NotesGUI(this);
 	card_panel.add(notes_panel, "Notes");
 
-        
-        
-        
     }
 
     /**
