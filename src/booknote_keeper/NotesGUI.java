@@ -6,6 +6,7 @@ package booknote_keeper;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.util.ArrayList;
 import javax.swing.BorderFactory;
@@ -15,6 +16,7 @@ import javax.swing.JList;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JTextArea;
 
 /**
  *
@@ -25,6 +27,7 @@ public class NotesGUI extends javax.swing.JPanel {
     private ArrayList<Book> books = new ArrayList<>();
     private JList<String> booklist;
     private DefaultListModel<String> listModel;
+    private JTextArea textArea;
     
     MainGUI mg;
     /**
@@ -46,18 +49,29 @@ public class NotesGUI extends javax.swing.JPanel {
         booklist.setBorder(new EmptyBorder(5,5,5,5));
         notelist_panel.add(scrollPane, BorderLayout.CENTER); 
         
+        
+
+        
         booklist.setCellRenderer(new DefaultListCellRenderer() {
             private int padding = 5; 
-            private Font font = new Font("Cascadia Code", Font.PLAIN, 14); // Customize the font here
+            private Font bookFont = new Font("Cascadia Code", Font.BOLD, 14); 
+            private Font noteFont = new Font("Cascadia Code", Font.PLAIN, 12);
 
             @Override
-            public Component getListCellRendererComponent(JList<?> list, Object value, int index,
-                    boolean isSelected, boolean cellHasFocus) {
-                Component c = super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+            public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+                JLabel label = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+                String text = value.toString();
 
-                setFont(font);
-                setBorder(BorderFactory.createEmptyBorder(padding, 0, 0, 0));
-                return c;
+                // set different font for book label and notes
+                if (text.startsWith("Book:")) {
+                    label.setFont(bookFont);
+                } else {
+                    label.setFont(noteFont);
+                    label.setText("<html><body style='width: 550px;'>" + value.toString() + "</body></html>");
+                }
+
+  
+                return label;
             }
         });
         
@@ -75,7 +89,7 @@ public class NotesGUI extends javax.swing.JPanel {
             ArrayList<Note> notes = book.getNotes();
             for(Note note: notes){
                 String noteText = "     " + note.getText();
-                listModel.addElement(noteText);   
+                listModel.addElement("<html>" + noteText + "</html>");
             }
         }
     }

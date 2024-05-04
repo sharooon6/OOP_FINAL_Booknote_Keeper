@@ -39,7 +39,8 @@ public class IndividualBookGUI extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         book_genre = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        book_review = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        book_review = new javax.swing.JTextArea();
 
         jPanel1.setBackground(java.awt.Color.darkGray);
 
@@ -109,8 +110,14 @@ public class IndividualBookGUI extends javax.swing.JPanel {
         jLabel2.setFont(new java.awt.Font("Cascadia Code", 0, 14)); // NOI18N
         jLabel2.setText("Review:");
 
+        book_review.setEditable(false);
+        book_review.setColumns(20);
         book_review.setFont(new java.awt.Font("Cascadia Code", 0, 14)); // NOI18N
-        book_review.setText("placeholder");
+        book_review.setLineWrap(true);
+        book_review.setRows(5);
+        book_review.setWrapStyleWord(true);
+        book_review.setMargin(new java.awt.Insets(12, 16, 12, 16));
+        jScrollPane1.setViewportView(book_review);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -121,14 +128,14 @@ public class IndividualBookGUI extends javax.swing.JPanel {
                 .addGap(17, 17, 17)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(book_review, javax.swing.GroupLayout.PREFERRED_SIZE, 553, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(book_genre, javax.swing.GroupLayout.PREFERRED_SIZE, 447, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(34, Short.MAX_VALUE))
+                        .addComponent(book_genre, javax.swing.GroupLayout.PREFERRED_SIZE, 447, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 528, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(60, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(book_author, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -145,10 +152,10 @@ public class IndividualBookGUI extends javax.swing.JPanel {
                     .addComponent(jLabel1)
                     .addComponent(book_genre))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(book_review, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(0, 453, Short.MAX_VALUE))
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 33, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -184,7 +191,7 @@ public class IndividualBookGUI extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel book_author;
     private javax.swing.JLabel book_genre;
-    private javax.swing.JLabel book_review;
+    private javax.swing.JTextArea book_review;
     private javax.swing.JLabel book_title;
     private javax.swing.JButton btn_back;
     private javax.swing.JButton btn_delete;
@@ -192,5 +199,6 @@ public class IndividualBookGUI extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }
